@@ -1,0 +1,16 @@
+.front {
+  background-color: purple;
+  width: 225px;
+  height: 225px;
+  margin: auto;
+  border: 3px solid white;
+  border-radius: 35px;
+}
+.back {
+  background-color: gainsboro;
+  width: 225px;
+  height: 225px;
+  margin: auto;
+  border: 3px solid white;
+  border-radius: 35px;
+}

@@ -1,24 +1,75 @@
-import React from 'react';
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
 import './App.css';
+import { ICard, Card } from './components/card/card';
+import { NewGameButton } from './components/new-game-button/new-game-button';
 
-function App() {
+const cardColors = [
+  'blue',
+  'black',
+  'red',
+  'green',
+  'orange',
+  'purple',
+  'yellow',
+  'gray'
+]
+
+const App = () => {
+  const [cards, setCards] = useState<Array<ICard>>([]);
+  const [cardFlips, setCardFlips] = useState<number>(0);
+  const [firstChoice, setFirstChoice] = useState<ICard|null>(null);
+  const [secondChoice, setSecondChoice] = useState<ICard|null>(null);
+
+  const shuffleCards = () => {
+    let shuffledColors = [...cardColors, ...cardColors];
+    let currentIndex = shuffledColors.length;
+    let idAssignment = 0;
+    let randomIndex;
+
+    while (currentIndex--) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      [shuffledColors[currentIndex], shuffledColors[randomIndex]] = [shuffledColors[randomIndex], shuffledColors[currentIndex]];
+    }
+    
+    setCards( shuffledColors.map((card) => ({id: idAssignment++, cardColor: card, matched: false})) )
+    setCardFlips(0)
+  }
+
+  const handleChoice = (card: ICard) => {
+    firstChoice ? setSecondChoice(card) : setFirstChoice(card)
+    setCardFlips(cardFlips+1)
+  }
+
+  useEffect(() => {
+    if (firstChoice && secondChoice && (firstChoice.id !== secondChoice.id)) {
+      if (firstChoice.cardColor === secondChoice.cardColor) {
+        setCards(
+          cards.map((card) => {
+            if (card.cardColor === firstChoice.cardColor) {
+              return {...card, matched: true}
+            }
+            return card
+          })
+        )
+      }
+      resetChoices();
+    }
+  }, [firstChoice, secondChoice]);
+
+  const resetChoices = () => {
+    setFirstChoice(null);
+    setSecondChoice(null);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1 className="memory-match">Memory Match</h1>
+      <NewGameButton onClick={() => shuffleCards()}/>
+      <div className="cards">
+        {cards.map((card) => (
+          <Card key={card.id} card={card} handleChoice={handleChoice}/>    
+        ))}
+      </div>
     </div>
   );
 }
