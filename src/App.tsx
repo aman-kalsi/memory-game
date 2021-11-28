@@ -43,16 +43,21 @@ const App = () => {
   useEffect(() => {
     if (firstChoice && secondChoice && (firstChoice.id !== secondChoice.id)) {
       if (firstChoice.cardColor === secondChoice.cardColor) {
-        setCards(
-          cards.map((card) => {
-            if (card.cardColor === firstChoice.cardColor) {
-              return {...card, matched: true}
-            }
-            return card
-          })
-        )
+        setTimeout(() => {
+          setCards(
+            cards.map((card) => {
+              if (card.cardColor === firstChoice.cardColor) {
+                return {...card, matched: true}
+              }
+              return card
+            })
+          );
+          resetChoices();
+        }, 500)
       }
-      resetChoices();
+      else {
+        setTimeout(() => {resetChoices()}, 1000);
+      }
     }
   }, [firstChoice, secondChoice]);
 
@@ -67,7 +72,7 @@ const App = () => {
       <NewGameButton onClick={() => shuffleCards()}/>
       <div className="cards">
         {cards.map((card) => (
-          <Card key={card.id} card={card} handleChoice={handleChoice}/>    
+          <Card key={card.id} card={card} handleChoice={handleChoice} flipped={card === firstChoice || card === secondChoice}/>    
         ))}
       </div>
     </div>

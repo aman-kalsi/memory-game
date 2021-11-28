@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './card.css'
 
 export interface ICard {
@@ -8,9 +8,8 @@ export interface ICard {
   matched: boolean
 }
 
-export const Card = (props: {card: ICard, handleChoice: (card:ICard)=>void}) => {
-  const [isFlipped, setIsFlipped] = useState(false);
-  const {card, handleChoice} = props;
+export const Card = (props: {card: ICard, handleChoice: (card:ICard)=>void, flipped: boolean} ) => {
+  const {card, handleChoice, flipped} = props;
   
   const handleClick = () => {
     handleChoice(card)
@@ -21,13 +20,12 @@ export const Card = (props: {card: ICard, handleChoice: (card:ICard)=>void}) => 
       className="card"
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
-      onClick={() => setIsFlipped(!isFlipped)}
       animate={{
-        rotateY: isFlipped ? 180 : 0
+        rotateY: flipped ? 180 : 0
       }}
     >
-      {isFlipped && <div className="front" style={{background: card.cardColor}}/>}
-      {!isFlipped && <div className="back" onClick={() => handleClick()}/>}
+      {!card.matched && flipped && <div className="front" style={{background: card.cardColor}}/>}
+      {!card.matched && !flipped && <div className="back" onClick={() => handleClick()}/>}
     </motion.div>
   );
 }
