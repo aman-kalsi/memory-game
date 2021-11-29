@@ -4,7 +4,7 @@ import './card.css'
 
 export interface ICard {
   id: number,
-  cardColor: string,
+  cardImage: string,
   matched: boolean
 }
 
@@ -20,11 +20,13 @@ export const Card = (props: {card: ICard, handleChoice: (card:ICard)=>void, flip
       className="card"
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
+      initial={{opacity: 0}}
       animate={{
-        rotateY: flipped ? 180 : 0
+        rotateY: flipped ? 180 : 0,
+        opacity: 1
       }}
     >
-      {!card.matched && flipped && <div className="front" style={{background: card.cardColor}}/>}
+      {!card.matched && flipped && <img src={card.cardImage} alt="christmas image" className="front"/>}
       {!card.matched && !flipped && <div className="back" onClick={() => handleClick()}/>}
     </motion.div>
   );

@@ -3,15 +3,19 @@ import './App.css';
 import { ICard, Card } from './components/card/card';
 import { NewGameButton } from './components/new-game-button/new-game-button';
 
-const cardColors = [
-  'blue',
-  'black',
-  'red',
-  'green',
-  'orange',
-  'purple',
-  'yellow',
-  'gray'
+const cardImages = [
+  'img/gingerbreadman.png',
+  'img/gingerbreadwoman.png',
+  'img/mr boy.png',
+  'img/mr penguin.png',
+  'img/mr santa.png',
+  'img/mr snowman.png',
+  'img/mrs santa.png',
+  'img/ms girl.png',
+  'img/ms penguin.png',
+  'img/ms snowwoman.png',
+  'img/reindeer.png',
+  'img/rudolf.png'
 ]
 
 const App = () => {
@@ -21,17 +25,17 @@ const App = () => {
   const [secondChoice, setSecondChoice] = useState<ICard|null>(null);
 
   const shuffleCards = () => {
-    let shuffledColors = [...cardColors, ...cardColors];
-    let currentIndex = shuffledColors.length;
+    let shuffledImages = [...cardImages, ...cardImages];
+    let currentIndex = shuffledImages.length;
     let idAssignment = 0;
     let randomIndex;
 
     while (currentIndex--) {
       randomIndex = Math.floor(Math.random() * currentIndex);
-      [shuffledColors[currentIndex], shuffledColors[randomIndex]] = [shuffledColors[randomIndex], shuffledColors[currentIndex]];
+      [shuffledImages[currentIndex], shuffledImages[randomIndex]] = [shuffledImages[randomIndex], shuffledImages[currentIndex]];
     }
     
-    setCards( shuffledColors.map((card) => ({id: idAssignment++, cardColor: card, matched: false})) )
+    setCards( shuffledImages.map((card) => ({id: idAssignment++, cardImage: card, matched: false})) )
     setCardFlips(0)
   }
 
@@ -42,11 +46,11 @@ const App = () => {
 
   useEffect(() => {
     if (firstChoice && secondChoice && (firstChoice.id !== secondChoice.id)) {
-      if (firstChoice.cardColor === secondChoice.cardColor) {
+      if (firstChoice.cardImage === secondChoice.cardImage) {
         setTimeout(() => {
           setCards(
             cards.map((card) => {
-              if (card.cardColor === firstChoice.cardColor) {
+              if (card.cardImage === firstChoice.cardImage) {
                 return {...card, matched: true}
               }
               return card
@@ -68,7 +72,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <h1 className="memory-match">Memory Match</h1>
+      <h1 className="memory-match">Chtistmas-Themed Memory Match (by Aman Kalsi)</h1>
       <NewGameButton onClick={() => shuffleCards()}/>
       <div className="cards">
         {cards.map((card) => (
