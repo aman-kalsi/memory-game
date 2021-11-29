@@ -1,5 +1,5 @@
 .App {
-  max-width: 1500px;
+  max-width: 1000px;
   margin: auto;
   text-align: center;
 }
@@ -10,5 +10,5 @@
   display: grid;
   margin-top: 50px;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-gap: 10px;
+  grid-gap: 15px;
 }

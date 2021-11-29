@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
 import './card.css'
 
 export interface ICard {
@@ -27,7 +26,7 @@ export const Card = (props: {card: ICard, handleChoice: (card:ICard)=>void, flip
       }}
     >
       {!card.matched && flipped && <img src={card.cardImage} alt="christmas image" className="front"/>}
-      {!card.matched && !flipped && <div className="back" onClick={() => handleClick()}/>}
+      {!card.matched && !flipped && <img src="img/christmas tree.png" className="back" onClick={() => handleClick()}/>}
     </motion.div>
   );
 }
