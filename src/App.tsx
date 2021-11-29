@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import { ICard, Card } from './components/card/card';
 import { NewGameButton } from './components/new-game-button/new-game-button';
+import { ProgressBar } from './components/progress/progress';
 
 const cardImages = [
   'img/gingerbreadman.png',
@@ -10,11 +11,11 @@ const cardImages = [
   'img/mr penguin.png',
   'img/mr santa.png',
   'img/mr snowman.png',
-  'img/mrs santa.png',
+  //'img/mrs santa.png',
   'img/ms girl.png',
   'img/ms penguin.png',
   'img/ms snowwoman.png',
-  'img/reindeer.png',
+  //'img/reindeer.png',
   'img/rudolf.png'
 ]
 
@@ -72,8 +73,9 @@ const App = () => {
 
   return (
     <div className="App">
-      <h1 className="memory-match">Chtistmas-Themed Memory Match (by Aman Kalsi)</h1>
+      <h1 className="memory-match">Memory Match (by Aman Kalsi)</h1>
       <NewGameButton onClick={() => shuffleCards()}/>
+      <ProgressBar cards={cards}/>
       <div className="cards">
         {cards.map((card) => (
           <Card key={card.id} card={card} handleChoice={handleChoice} flipped={card === firstChoice || card === secondChoice}/>    
