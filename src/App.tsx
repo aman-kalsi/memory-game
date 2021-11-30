@@ -3,6 +3,8 @@ import './App.css';
 import { ICard, Card } from './components/card/card';
 import { NewGameButton } from './components/new-game-button/new-game-button';
 import { ProgressBar } from './components/progress/progress';
+import { Status } from './components/status/status';
+import { Victory } from './components/victory/victory';
 
 const cardImages = [
   'img/gingerbreadman.png',
@@ -73,14 +75,19 @@ const App = () => {
 
   return (
     <div className="App">
-      <h1 className="memory-match">Memory Match (by Aman Kalsi)</h1>
+      <div className="memory-match">Memory Match (by Aman Kalsi)</div>
       <NewGameButton onClick={() => shuffleCards()}/>
-      <ProgressBar cards={cards}/>
-      <div className="cards">
-        {cards.map((card) => (
-          <Card key={card.id} card={card} handleChoice={handleChoice} flipped={card === firstChoice || card === secondChoice}/>    
-        ))}
-      </div>
+      <Status cardFlips={cardFlips}/>
+      
+      { !cards.every((card) => card.matched) &&
+        <div className="cards">
+          {cards.map((card) => (
+            <Card key={card.id} card={card} handleChoice={handleChoice} flipped={card === firstChoice || card === secondChoice}/>    
+          ))}
+        </div>
+      }
+      {cards.every((card) => card.matched) && <Victory cardFlips={cardFlips}/>}
+      {!cards.every((card) => card.matched) && <ProgressBar cards={cards}/>}
     </div>
   );
 }

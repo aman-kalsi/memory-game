@@ -1,10 +1,13 @@
 .App {
-  max-width: 1000px;
+  max-width: 1250px;
   margin: auto;
   text-align: center;
 }
 .memory-match {
   color: white;
+  margin: 20px auto;
+  font-size: 50px;
+  font-weight: bold;
 }
 .cards {
   display: grid;

@@ -1,9 +1,21 @@
+import { motion } from 'framer-motion';
 import './victory.css'
 
-export const Victory = () => {
+export const Victory = (props: {cardFlips: number}) => {
+  const {cardFlips} = props
+
   return (
-    <div className="victory-canvas">
-      <h1 className='victory-message'>YOU'VE WON!</h1>
-    </div>
+    <motion.div
+      initial={{ 
+        opacity: 0,
+      }}
+      animate={{ 
+        opacity: 1 
+      }}
+      exit={{ 
+        opacity: 0
+      }}>
+      <h1 className='victory-message'>You've won with {cardFlips} flips! Happy Holidays :)</h1>
+    </motion.div>
   );
 }

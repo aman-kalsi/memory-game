@@ -1,7 +1,7 @@
 .progress-bar-shell {
-  margin: 50px auto;
-  width: 500px;
-  height: 25px;
+  margin: 25px auto;
+  width: 600px;
+  height: 40px;
   border: 5px solid white;
   border-radius: 10px;
 }
@@ -9,7 +9,7 @@
 .progress-bar {
   margin: auto;
   background-color: white;
-  height: 25px;
+  height: 40px;
   border: 5px solid white;
   border-radius: 10px;
 }

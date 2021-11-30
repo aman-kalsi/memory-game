@@ -5,7 +5,7 @@ import Snowfall from 'react-snowfall'
 
 ReactDOM.render(
   <div>
-    <Snowfall />
+    <Snowfall snowflakeCount={300}/>
     <App />
   </div>,
   document.getElementById('root')

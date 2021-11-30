@@ -1,15 +1,15 @@
 .front {
   background-color: white;
-  width: 150px;
-  height: 150px;
+  width: 200px;
+  height: 200px;
   margin: auto;
   border: 3px solid white;
   border-radius: 35px;
 }
 .back {
   background-color: #00d811;
-  width: 150px;
-  height: 150px;
+  width: 200px;
+  height: 200px;
   margin: auto;
   border: 3px solid white;
   border-radius: 35px;

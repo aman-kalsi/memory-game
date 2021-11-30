@@ -1,9 +1,5 @@
 .victory-message {
-  margin: auto;
+  margin: 250px auto;
   color: white;
-}
-
-.victory-canvas {
-  width: 1000px;
-  height: 1000px;
+  font-size: 100px;
 }

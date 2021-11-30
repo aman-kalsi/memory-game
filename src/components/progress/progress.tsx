@@ -11,17 +11,26 @@ export const ProgressBar = (props: {cards: ICard[]}) => {
   }
   
   return (
-    <div className="progress-bar-shell">
+    <motion.div 
+      className="progress-bar-shell"
+      initial={{opacity:0,}}
+      animate={{opacity: 1,}}
+      exit= {{opacity: 0}}>
       <motion.div 
         className="progress-bar"
         initial={{
+          opacity:0,
           width: 0,
           y: -5
         }}
         animate={{
-          width: 25*progress()
+          opacity: 1,
+          width: 30*progress()
+        }}
+        exit= {{
+          opacity: 0
         }}
       />
-    </div>
+    </motion.div>
   );
 }
